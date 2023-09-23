@@ -1,0 +1,128 @@
+swagger: "2.0"
+info:
+  title: ecommerce-api
+  version: 1.0.0
+basePath: /api
+tags:
+  - name: category
+    description: Category operations
+
+paths:
+  /categories:
+    post:
+      summary: Create a new category
+      description: Create a new category with a name and an optional parent ID.
+      tags:
+        - category
+      parameters:
+        - in: body
+          name: category
+          description: Category object
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                maxLength: 20
+                description: The name of the category.
+              parentId:
+                type: integer
+                format: int64
+                description: The ID of the parent category (optional).
+      responses:
+        201:
+          description: Category created successfully
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+
+    get:
+      summary: Get a list of categories
+      description: Retrieve a list of all categories.
+      tags:
+        - category
+      responses:
+        200:
+          description: Successful response
+        500:
+          description: Internal server error
+
+  /categories/{id}:
+    get:
+      summary: Get a category
+      description: Retrieve a category by ID.
+      tags:
+        - category
+      parameters:
+        - in: path
+          name: id
+          description: The ID of the category to retrieve.
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Successful response
+        404:
+          description: Category not found
+        500:
+          description: Internal server error
+
+    put:
+      summary: Update a category
+      description: Update a category by ID.
+      tags:
+        - category
+      parameters:
+        - in: path
+          name: id
+          description: The ID of the category to update.
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: category
+          description: Category object
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                maxLength: 20
+                description: The name of the category.
+              parentId:
+                type: integer
+                format: int64
+                description: The ID of the parent category (optional).
+      responses:
+        200:
+          description: Category updated successfully
+        400:
+          description: Bad request
+        404:
+          description: Category not found
+        500:
+          description: Internal server error
+
+    delete:
+      summary: Delete a category
+      description: Delete a category by ID.
+      tags:
+        - category
+      parameters:
+        - in: path
+          name: id
+          description: The ID of the category to delete.
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Category deleted successfully
+        404:
+          description: Category not found
+        500:
+          description: Internal server error
