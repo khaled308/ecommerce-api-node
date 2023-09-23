@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec ts-node src/app.ts"
+    "dev": "nodemon --exec ts-node src/app.ts",
+    "migrate": "for module in ./src/components/*; do sequelize db:migrate --migrations-path \"$module/database/migrations\"; done",
+    "migrate:undo": "for module in ./src/components/*; do sequelize db:migrate:undo --migrations-path \"$module/database/migrations\"; done"
   },
   "keywords": [],
   "author": "",
