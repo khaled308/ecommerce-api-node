@@ -52,13 +52,14 @@ class ProductService {
 
   async deleteProduct(id: number) {
     try {
-      await Product.destroy({
+      const product = await Product.destroy({
         where: { id },
       });
+      return product;
     } catch (error) {
       console.log(error);
     }
   }
 }
 
-export default ProductService;
+export default new ProductService();

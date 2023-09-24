@@ -10,4 +10,7 @@ export default {
   mysqlPassword: process.env.MYSQL_PASSWORD!,
   mysqlDatabase: process.env.MYSQL_DATABASE!,
   mysqlPort: process.env.MYSQL_PORT!,
+  cloudinaryCloudName: process.env.CLOUDINARY_CLOUD_NAME!,
+  cloudinaryApiKey: process.env.CLOUDINARY_API_KEY!,
+  cloudinarySecret: process.env.CLOUDINARY_SECRET!,
 };
