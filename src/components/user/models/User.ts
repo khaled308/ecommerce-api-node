@@ -52,3 +52,5 @@ User.init(
     sequelize,
   }
 );
+
+export default User;

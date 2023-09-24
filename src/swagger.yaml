@@ -10,6 +10,9 @@ tags:
   - name: product
     description: Product operations
 
+  - name: auth
+    description: Authentication operations
+
 paths:
   /categories:
     post:
@@ -266,5 +269,71 @@ paths:
           description: Product deleted successfully
         404:
           description: Product not found
+        500:
+          description: Internal server error
+
+  /auth/login:
+    post:
+      summary: Login
+      description: Login with a username and password.
+      tags:
+        - auth
+      parameters:
+        - in: body
+          name: credentials
+          description: Credentials object
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                maxLength: 50
+                description: The email.
+              password:
+                type: string
+                maxLength: 20
+                description: The password.
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal server error
+
+  /auth/register:
+    post:
+      summary: Register
+      description: Register with a username, password, and email.
+      tags:
+        - auth
+      parameters:
+        - in: body
+          name: credentials
+          description: Credentials object
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                maxLength: 20
+                description: The name.
+              password:
+                type: string
+                maxLength: 20
+                description: The password.
+              email:
+                type: string
+                maxLength: 50
+                description: The email.
+      responses:
+        201:
+          description: Successful response
+        400:
+          description: Bad request
         500:
           description: Internal server error
