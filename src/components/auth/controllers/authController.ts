@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import jwt from "jsonwebtoken";
 import authService from "../services/authService";
 import sendEmail from "../../../shared/services/sendEmail";
 import config from "../../../config";
@@ -8,6 +9,12 @@ class AuthController {
     try {
       const { email, password } = req.body;
       const user = await authService.loginService({ email, password });
+      const token = jwt.sign({ userId: user.id }, config.jwtSecret as string);
+
+      res.cookie("access_token", token, {
+        maxAge: 1000 * 60 * 60 * 24 * 365,
+      });
+
       return res.status(200).json(user);
     } catch (err) {
       const { message = "something went wrong" } = err as { message?: string };
@@ -20,6 +27,16 @@ class AuthController {
       const { email, password, name } = req.body;
       const user = await authService.registerService({ email, password, name });
       return res.status(200).json(user);
+    } catch (err) {
+      const { message = "something went wrong" } = err as { message?: string };
+      return res.status(400).json({ message });
+    }
+  }
+
+  async logout(req: Request, res: Response) {
+    try {
+      res.clearCookie("access_token");
+      return res.status(200).json({ message: "success" });
     } catch (err) {
       const { message = "something went wrong" } = err as { message?: string };
       return res.status(400).json({ message });
