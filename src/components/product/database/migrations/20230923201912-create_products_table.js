@@ -12,16 +12,16 @@ module.exports = {
       },
       name: {
         allowNull: false,
-        type: Sequelize.STRING(30),
+        type: Sequelize.STRING(255),
         unique: true,
       },
       description: {
         allowNull: false,
-        type: Sequelize.STRING(100),
+        type: Sequelize.TEXT,
       },
       price: {
         allowNull: false,
-        type: Sequelize.DECIMAL(),
+        type: Sequelize.FLOAT,
       },
       stock: {
         allowNull: false,
@@ -40,7 +40,7 @@ module.exports = {
       },
       image: {
         allowNull: true,
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(255),
       },
       createAt: {
         allowNull: false,

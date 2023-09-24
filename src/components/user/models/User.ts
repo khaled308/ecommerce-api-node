@@ -1,5 +1,6 @@
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../../../db";
+import Review from "../../review/models/Review";
 
 class User extends Model {
   public id!: number;
@@ -68,5 +69,7 @@ User.init(
     sequelize,
   }
 );
+
+User.hasMany(Review, { foreignKey: "userId", as: "reviews" });
 
 export default User;

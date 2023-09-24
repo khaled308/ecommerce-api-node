@@ -1,5 +1,6 @@
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../../../db";
+import Review from "../../review/models/Review";
 
 class Product extends Model {
   public id!: number;
@@ -21,28 +22,24 @@ Product.init(
       primaryKey: true,
     },
     name: {
-      type: DataTypes.STRING(20),
+      type: DataTypes.STRING(255),
       allowNull: false,
     },
     price: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.FLOAT.UNSIGNED,
       allowNull: false,
     },
     categoryId: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       field: "category_id",
-      references: {
-        model: Product,
-        key: "id",
-      },
     },
     description: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     image: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.STRING(255),
       allowNull: true,
     },
     stock: {
@@ -68,5 +65,6 @@ Product.init(
 );
 
 Product.belongsTo(Product, { foreignKey: "categoryId", as: "category" });
+Product.hasMany(Review, { foreignKey: "productId", as: "reviews" });
 
 export default Product;
