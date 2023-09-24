@@ -7,6 +7,9 @@ class User extends Model {
   public email!: string;
   public password!: string;
   public role!: string;
+  public status!: string;
+  public resetPasswordToken!: string;
+  public resetPasswordExpire!: Date;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -35,6 +38,19 @@ User.init(
       type: new DataTypes.ENUM("admin", "user"),
       allowNull: false,
       defaultValue: "user",
+    },
+    status: {
+      type: new DataTypes.ENUM("active", "inactive"),
+      allowNull: false,
+      defaultValue: "active",
+    },
+    resetPasswordToken: {
+      type: new DataTypes.STRING(128),
+      allowNull: true,
+    },
+    resetPasswordExpire: {
+      type: DataTypes.DATE,
+      allowNull: true,
     },
     createdAt: {
       type: DataTypes.DATE,
