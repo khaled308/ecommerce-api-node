@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import categoryService from "../services/categoryService";
+import ApiFeatures from "../../../shared/services/ApiFeatures";
+import Category from "../models/Category";
 
 class CategoryController {
   async createCategory(req: Request, res: Response) {
@@ -9,8 +11,10 @@ class CategoryController {
   }
 
   async getCategories(req: Request, res: Response) {
-    const categories = await categoryService.getCategories();
-    return res.json(categories);
+    const apiFeatures = new ApiFeatures(Category, req.query);
+    const results = await apiFeatures.run();
+
+    return res.json(results);
   }
 
   async getCategory(req: Request, res: Response) {

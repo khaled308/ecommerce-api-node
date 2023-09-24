@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import productService from "../services/productService";
 import uploadFile from "../../../shared/services/uploadFile";
+import ApiFeatures from "../../../shared/services/ApiFeatures";
+import Product from "../models/Product";
 
 class ProductController {
   async createProduct(req: Request, res: Response) {
@@ -19,9 +21,10 @@ class ProductController {
   }
 
   async getProducts(req: Request, res: Response) {
-    const products = await productService.getProducts();
+    const apiFeatures = new ApiFeatures(Product, req.query);
+    const results = await apiFeatures.run();
 
-    return res.json(products);
+    return res.json(results);
   }
 
   async getProduct(req: Request, res: Response) {

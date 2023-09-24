@@ -337,3 +337,59 @@ paths:
           description: Bad request
         500:
           description: Internal server error
+
+  /auth/create-reset-password-token:
+    post:
+      summary: Create reset password token
+      description: Create a reset password token with an email.
+      tags:
+        - auth
+      parameters:
+        - in: body
+          name: email
+          description: Email object
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                maxLength: 50
+                description: The email.
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+
+  /auth/reset-password:
+    post:
+      summary: Reset password
+      description: Reset the password with a token and a new password.
+      tags:
+        - auth
+      parameters:
+        - in: body
+          name: credentials
+          description: Credentials object
+          required: true
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                maxLength: 50
+                description: The token.
+              password:
+                type: string
+                maxLength: 20
+                description: The password.
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Internal server error

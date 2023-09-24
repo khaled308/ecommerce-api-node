@@ -47,6 +47,15 @@ class CategoryService {
       console.log(err);
     }
   }
+
+  async getCategoriesCount() {
+    try {
+      const categoriesCount = await Category.count();
+      return categoriesCount;
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
 
 export default new CategoryService();

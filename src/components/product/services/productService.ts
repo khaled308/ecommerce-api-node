@@ -60,6 +60,15 @@ class ProductService {
       console.log(error);
     }
   }
+
+  async getProductsCount() {
+    try {
+      const productsCount = await Product.count();
+      return productsCount;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 export default new ProductService();
