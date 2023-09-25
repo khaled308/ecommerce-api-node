@@ -6,7 +6,7 @@ import config from "./config";
 import transporter from "./shared/utils/mailer";
 
 // api documentation
-const swaggerDocument = yaml.load(__dirname + "/swagger.yaml");
+const swaggerDocument = yaml.load(__dirname + "/../swagger.yaml");
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(config.port, () => {

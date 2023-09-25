@@ -2,7 +2,7 @@ const { execSync } = require("child_process");
 
 const base = __dirname + "/src/components";
 
-const modules = ["category", "product", "user", "review"];
+const modules = ["category", "product", "user", "review", "wishlist"];
 
 const migration = async () => {
   for (const migrationPath of modules.map(

@@ -13,6 +13,12 @@ tags:
   - name: auth
     description: Authentication operations
 
+  - name: reviews
+    description: Review operations
+
+  - name: wishlist
+    description: Wishlist operations
+
 paths:
   /categories:
     post:
@@ -391,5 +397,189 @@ paths:
           description: Successful response
         400:
           description: Bad request
+        500:
+          description: Internal server error
+
+  /reviews:
+    post:
+      summary: Create a new review
+      description: Create a new review with a rating, title, and description.
+      tags:
+        - reviews
+      parameters:
+        - in: body
+          name: review
+          description: Review object
+          required: true
+          schema:
+            type: object
+            properties:
+              rating:
+                type: integer
+                format: int64
+                description: The rating.
+              productId:
+                type: integer
+                format: int64
+                description: The ID of the product.
+              comment:
+                type: string
+                maxLength: 100
+                description: The comment.
+      responses:
+        201:
+          description: Review created successfully
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+
+  /reviews/{id}:
+    put:
+      summary: Update a review
+      description: Update a review by ID.
+      tags:
+        - reviews
+      parameters:
+        - in: path
+          name: id
+          description: The ID of the review to update.
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: review
+          description: Review object
+          required: true
+          schema:
+            type: object
+            properties:
+              rating:
+                type: integer
+                format: int64
+                description: The rating.
+              productId:
+                type: integer
+                format: int64
+                description: The ID of the product.
+              comment:
+                type: string
+                maxLength: 100
+                description: The comment.
+      responses:
+        200:
+          description: Review updated successfully
+        400:
+          description: Bad request
+        404:
+          description: Review not found
+        500:
+          description: Internal server error
+
+    delete:
+      summary: Delete a review
+      description: Delete a review by ID.
+      tags:
+        - reviews
+      parameters:
+        - in: path
+          name: id
+          description: The ID of the review to delete.
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Review deleted successfully
+        404:
+          description: Review not found
+        500:
+          description: Internal server error
+
+  /reviews/product/{id}:
+    get:
+      summary: Get a list of reviews
+      description: Retrieve a list of all reviews for a product.
+      tags:
+        - reviews
+      parameters:
+        - in: path
+          name: id
+          description: The ID of the product.
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Successful response
+        500:
+          description: Internal server error
+
+  /wishlist:
+    post:
+      summary: Add a product to the wishlist
+      description: Add a product to the wishlist with a product ID.
+      tags:
+        - wishlist
+      parameters:
+        - in: body
+          name: wishlist
+          description: Wishlist object
+          required: true
+          schema:
+            type: object
+            properties:
+              productId:
+                type: integer
+                format: int64
+                description: The ID of the product.
+      responses:
+        201:
+          description: Product added to the wishlist successfully
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+
+    get:
+      summary: Get a list of products in the wishlist
+      description: Retrieve a list of all products in the wishlist.
+      tags:
+        - wishlist
+      responses:
+        200:
+          description: Successful response
+        500:
+          description: Internal server error
+
+    delete:
+      summary: clear user wishlist
+      description: clear user wishlist
+      tags:
+        - wishlist
+      responses:
+        200:
+          description: Successful response
+        500:
+          description: Internal server error
+
+  /wishlist/{productId}:
+    delete:
+      summary: Delete a product from the wishlist
+      description: Delete a product from the wishlist by product ID.
+      tags:
+        - wishlist
+      parameters:
+        - in: path
+          name: productId
+          description: The ID of the product to delete.
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Product deleted from the wishlist successfully
+        404:
+          description: Product not found
         500:
           description: Internal server error

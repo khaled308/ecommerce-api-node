@@ -5,6 +5,7 @@ import categoryRoutes from "./components/category/routes/categoryRoutes";
 import productRoutes from "./components/product/routes/productRoutes";
 import authRoutes from "./components/auth/routes/authRoutes";
 import reviewRoutes from "./components/review/routes/reviewRoutes";
+import wishlistRoutes from "./components/wishlist/routes/wishlistRoutes";
 
 const app = express();
 
@@ -17,5 +18,6 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/reviews", reviewRoutes);
+app.use("/api/wishlist", wishlistRoutes);
 
 export default app;
