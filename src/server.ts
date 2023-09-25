@@ -6,6 +6,7 @@ import productRoutes from "./components/product/routes/productRoutes";
 import authRoutes from "./components/auth/routes/authRoutes";
 import reviewRoutes from "./components/review/routes/reviewRoutes";
 import wishlistRoutes from "./components/wishlist/routes/wishlistRoutes";
+import couponRoutes from "./components/coupon/routes/couponRoutes";
 
 const app = express();
 
@@ -19,5 +20,17 @@ app.use("/api/products", productRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/wishlist", wishlistRoutes);
+app.use("/api/coupons", couponRoutes);
+
+// catch 404 and forward to error handler
+app.use(function (req: any, res: any, next: any) {
+  res.status(404).send("Not Found");
+});
+
+// error handler
+app.use(function (err: any, req: any, res: any, next: any) {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
 
 export default app;

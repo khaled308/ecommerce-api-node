@@ -41,7 +41,7 @@ export const validateAdmin = async (
 
   const user = await User.findByPk(decoded.userId);
 
-  if (!user || user.role !== "admin") {
+  if (!user || user.dataValues.role !== "admin") {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
