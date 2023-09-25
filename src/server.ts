@@ -7,6 +7,7 @@ import authRoutes from "./components/auth/routes/authRoutes";
 import reviewRoutes from "./components/review/routes/reviewRoutes";
 import wishlistRoutes from "./components/wishlist/routes/wishlistRoutes";
 import couponRoutes from "./components/coupon/routes/couponRoutes";
+import cartRoutes from "./components/cart/routes/cartRoutes";
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/wishlist", wishlistRoutes);
 app.use("/api/coupons", couponRoutes);
+app.use("/api/cart", cartRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req: any, res: any, next: any) {
