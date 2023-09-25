@@ -63,7 +63,7 @@ Review.init(
   }
 );
 
-Review.belongsTo(Product, { foreignKey: "productId", as: "product" });
-Review.belongsTo(User, { foreignKey: "userId", as: "user" });
+// Review.belongsTo(Product, { foreignKey: "productId", as: "product" });
+// Review.belongsTo(User, { foreignKey: "userId", as: "user" });
 
 export default Review;

@@ -3,7 +3,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import config from "../../../config";
 import User from "../../user/models/User";
 
-export const validateToken = (
+export const validateToken = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -18,7 +18,9 @@ export const validateToken = (
     return res.status(401).json({ message: "Unauthorized" });
   }
 
+  const user = await User.findByPk(decoded.userId);
   req.body.userId = decoded.userId;
+  req.body.isAdmin = user?.role === "admin";
   next();
 };
 

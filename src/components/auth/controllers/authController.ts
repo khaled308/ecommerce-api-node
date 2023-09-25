@@ -9,7 +9,10 @@ class AuthController {
     try {
       const { email, password } = req.body;
       const user = await authService.loginService({ email, password });
-      const token = jwt.sign({ userId: user.id }, config.jwtSecret as string);
+      const token = jwt.sign(
+        { userId: user.dataValues.id },
+        config.jwtSecret as string
+      );
 
       res.cookie("access_token", token, {
         maxAge: 1000 * 60 * 60 * 24 * 365,

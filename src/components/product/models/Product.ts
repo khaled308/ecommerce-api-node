@@ -1,6 +1,7 @@
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../../../db";
 import Review from "../../review/models/Review";
+import Category from "../../category/models/Category";
 
 class Product extends Model {
   public id!: number;
@@ -64,7 +65,7 @@ Product.init(
   }
 );
 
-Product.belongsTo(Product, { foreignKey: "categoryId", as: "category" });
-Product.hasMany(Review, { foreignKey: "productId", as: "reviews" });
+// Product.belongsTo(Category, { foreignKey: "categoryId", as: "category" });
+// Product.hasMany(Review, { foreignKey: "productId", as: "reviews" });
 
 export default Product;

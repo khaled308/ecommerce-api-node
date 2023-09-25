@@ -69,6 +69,19 @@ class ProductService {
       console.log(error);
     }
   }
+
+  async getProductsByCategoryId(categoryId: number) {
+    try {
+      const products = await Product.findAll({
+        where: {
+          categoryId,
+        },
+      });
+      return products;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 export default new ProductService();
