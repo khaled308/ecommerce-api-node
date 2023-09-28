@@ -24,15 +24,17 @@ app.use("/api/wishlist", wishlistRoutes);
 app.use("/api/coupons", couponRoutes);
 app.use("/api/cart", cartRoutes);
 
-// catch 404 and forward to error handler
-app.use(function (req: any, res: any, next: any) {
-  res.status(404).send("Not Found");
-});
+export const handelAppError = () => {
+  // catch 404 and forward to error handler
+  app.use(function (req: any, res: any, next: any) {
+    res.status(404).send("Not Found");
+  });
 
-// error handler
-app.use(function (err: any, req: any, res: any, next: any) {
-  console.error(err.stack);
-  res.status(500).send("Something broke!");
-});
+  // error handler
+  app.use(function (err: any, req: any, res: any, next: any) {
+    console.error(err.stack);
+    res.status(500).send("Something broke!");
+  });
+};
 
 export default app;

@@ -1,6 +1,6 @@
 import swaggerUi from "swagger-ui-express";
 import yaml from "yamljs";
-import app from "./server";
+import app, { handelAppError } from "./server";
 import sequelize from "./db";
 import config from "./config";
 import transporter from "./shared/utils/mailer";
@@ -9,6 +9,7 @@ import transporter from "./shared/utils/mailer";
 const swaggerDocument = yaml.load(__dirname + "/../swagger.yaml");
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+handelAppError();
 app.listen(config.port, () => {
   console.log(`Server listening on port ${config.port}`);
 
